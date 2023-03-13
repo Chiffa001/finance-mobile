@@ -13,9 +13,10 @@ export const App = () => (
   <Provider store={store}>
     <NavigationContainer>
       <Navigator
-        initialRouteName={Routes.MAIN}
+        initialRouteName={Routes.REGISTRATION}
         screenOptions={{headerShown: false}}>
         <Screen {...routes.main} />
+        <Screen {...routes.registration} />
       </Navigator>
     </NavigationContainer>
   </Provider>
