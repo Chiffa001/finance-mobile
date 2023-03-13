@@ -1,19 +1,18 @@
-import {FC} from 'react';
-
+import {AuthScreen} from '~/screens/auth-screen';
 import {MainScreen} from '~/screens/main-screen';
-
-type Route = {
-  name: Routes;
-  component: FC;
-};
 
 export enum Routes {
   MAIN = 'MAIN_PAGE',
+  REGISTRATION = 'REGISTRATION_PAGE',
 }
 
-export const routes: Record<string, Route> = {
+export const routes = {
   main: {
     name: Routes.MAIN,
     component: MainScreen,
+  },
+  registration: {
+    name: Routes.REGISTRATION,
+    component: AuthScreen,
   },
 };
