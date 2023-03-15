@@ -1,31 +1,18 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useState} from 'react';
 import {Button, SafeAreaView, Text, TextInput} from 'react-native';
 
 import {FormField} from '~/components/ui/form-field';
 import {Space} from '~/components/ui/space';
 import {useAppDispatch} from '~/hooks/use-app-dispatch';
-import {useAppSelector} from '~/hooks/use-app-selector';
-import {Routes} from '~/routes';
 import {logIn} from '~/store/actions/auth-actions';
-import {NavigationProps} from '~/types/navigation';
 
 import {styles} from './styles';
 
-export const AuthScreen: FC<NavigationProps> = ({navigation}) => {
+export const AuthScreen: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const {isAuth} = useAppSelector(state => state.auth);
-
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (!isAuth) {
-      return;
-    }
-
-    navigation.navigate(Routes.MAIN);
-  }, [isAuth, navigation]);
 
   const logInPressHandler = () => {
     dispatch(
