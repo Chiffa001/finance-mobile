@@ -1,14 +1,9 @@
 import {StyleSheet} from 'react-native';
 
-const borderRadius = 6;
-
 export const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
-    borderBottomLeftRadius: borderRadius,
-    borderBottomRightRadius: borderRadius,
-    borderTopLeftRadius: borderRadius,
-    borderTopRightRadius: borderRadius,
+    borderRadius: 6,
     borderColor: 'rgba(32, 31, 30, 0.12)',
     paddingHorizontal: 10,
     paddingVertical: 10,
