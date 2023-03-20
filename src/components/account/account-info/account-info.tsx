@@ -19,7 +19,12 @@ export const AccountInfo: FC<Props> = ({account}) => {
   return (
     <>
       <AccountItem {...account} onPress={accountPressHandler} />
-      {showOperations && <OperationList accountId={account.id} />}
+      {showOperations && (
+        <OperationList
+          accountId={account.id}
+          currency={account.currency.code}
+        />
+      )}
     </>
   );
 };

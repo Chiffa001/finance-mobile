@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
     margin: 10,
   },
   label: {
-    fontFamily: 'Lato-Regular',
     fontSize: 20,
   },
 });

@@ -1,6 +1,6 @@
 import {Account} from './account';
 
-type OperationType = 'INCOME' | 'EXPENSE';
+export type OperationType = 'INCOME' | 'EXPENSE';
 
 export type Operation = {
   id: number;
