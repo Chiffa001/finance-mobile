@@ -1,10 +1,15 @@
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
-  item: {
-    flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'nowrap',
-    justifyContent: 'space-between',
+  positive: {
+    color: 'green',
+    fontSize: 15,
+  },
+  negative: {
+    color: 'red',
+    fontSize: 15,
+  },
+  sum: {
+    fontSize: 18,
   },
 });

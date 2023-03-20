@@ -5,8 +5,6 @@ import {useAccountList} from '~/hooks/use-account-list';
 
 import {renderItem} from './render-item';
 
-// import {styles} from './styles';
-
 export const AccountList = () => {
   const {list} = useAccountList();
 

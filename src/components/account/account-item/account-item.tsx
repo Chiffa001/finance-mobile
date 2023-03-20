@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import {Card, Text} from 'react-native-paper';
 
 import {Account} from '~/types/account';
 
@@ -15,10 +15,12 @@ export const AccountItem: FC<Props> = ({
   balance,
   onPress,
 }) => (
-  <TouchableOpacity style={styles.item} onPress={onPress}>
-    <Text style={styles.title}>{name}</Text>
-    <Text style={styles.balance}>
-      {balance} {code}
-    </Text>
-  </TouchableOpacity>
+  <Card onPress={onPress}>
+    <Card.Content>
+      <Text style={styles.title}>{name}</Text>
+      <Text style={styles.balance}>
+        {balance} {code}
+      </Text>
+    </Card.Content>
+  </Card>
 );

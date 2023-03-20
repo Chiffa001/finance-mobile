@@ -52,9 +52,6 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>UIAppFonts</key>
-	<array>
-		<string>Lato-Bold.ttf</string>
-		<string>Lato-Regular.ttf</string>
-	</array>
+	<array/>
 </dict>
 </plist>
