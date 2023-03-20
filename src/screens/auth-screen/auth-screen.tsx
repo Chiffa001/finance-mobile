@@ -1,5 +1,6 @@
 import React, {FC, useState} from 'react';
-import {Button, SafeAreaView, Text, TextInput} from 'react-native';
+import {Button, SafeAreaView} from 'react-native';
+import {Text, TextInput} from 'react-native-paper';
 
 import {FormField} from '~/components/ui/form-field';
 import {Space} from '~/components/ui/space';
@@ -28,18 +29,22 @@ export const AuthScreen: FC = () => {
       <Text style={styles.title}>Авторизация</Text>
       <FormField>
         <TextInput
+          label="Email"
+          mode="outlined"
+          activeOutlineColor="#4287f5"
+          style={styles.input}
           value={email}
           onChangeText={setEmail}
-          style={styles.input}
-          placeholder="email"
         />
       </FormField>
       <FormField>
         <TextInput
+          label="Password"
+          mode="outlined"
+          activeOutlineColor="#4287f5"
+          style={styles.input}
           value={password}
           onChangeText={setPassword}
-          style={styles.input}
-          placeholder="password"
           secureTextEntry={true}
         />
       </FormField>
