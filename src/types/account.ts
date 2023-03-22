@@ -12,3 +12,8 @@ export type AccountResponse = {
   accountList: Account[];
   user: User;
 };
+
+export type AccountData = {
+  name: string;
+  currencyId: number;
+};

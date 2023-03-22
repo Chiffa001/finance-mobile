@@ -13,7 +13,13 @@ export const Screens = () => {
   return (
     <Navigator screenOptions={{headerShown: false}}>
       {isAuth ? (
-        <Screen {...routes.mainStack} />
+        <>
+          <Screen {...routes.mainStack} />
+          <Screen
+            {...routes.addingAccount}
+            options={{headerShown: true, title: 'Добавить счёт'}}
+          />
+        </>
       ) : (
         <Screen {...routes.authorization} />
       )}

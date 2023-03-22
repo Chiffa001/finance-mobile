@@ -1,22 +1,14 @@
-import axios from 'axios';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 
+import {logIn as getAuthToken} from '~/services/auth';
 import {AuthActions} from '~/types/actions/auth-actions';
-import {AuthResponse} from '~/types/auth';
-import {BASE_API_URL} from '~env';
+import {AuthData} from '~/types/auth';
 
-export const logIn = createAsyncThunk<void, {email: string; password: string}>(
+export const logIn = createAsyncThunk<void, AuthData>(
   AuthActions.AUTH,
-  async ({email, password}) => {
-    const {data} = await axios.post<AuthResponse>(
-      `${BASE_API_URL}/users/login`,
-      {
-        email,
-        password,
-      },
-    );
-    await AsyncStorage.setItem('token', data.token);
+  async data => {
+    const token = await getAuthToken(data);
+    await AsyncStorage.setItem('token', token);
   },
 );
