@@ -1,6 +1,7 @@
+import {AddingAccountScreen} from '~/screens/adding-account-screen';
 import {AuthScreen} from '~/screens/auth-screen';
 import {MainScreen} from '~/screens/main-screen';
-import {MainStackScreen} from '~/screens/main-stack-screen/main-stack-screen';
+import {MainStackScreen} from '~/screens/main-stack-screen';
 import {StatisticsScreen} from '~/screens/statistics-screen';
 import {Route, RouteNames, Routes} from '~/types/navigation';
 
@@ -20,5 +21,9 @@ export const routes: Record<RouteNames, Route> = {
   [RouteNames.STATISTICS]: {
     name: Routes.STATISTICS,
     component: StatisticsScreen,
+  },
+  [RouteNames.ADDING_ACCOUNT]: {
+    name: Routes.ADDING_ACCOUNT,
+    component: AddingAccountScreen,
   },
 };

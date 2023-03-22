@@ -1,11 +1,9 @@
-import axios from 'axios';
-
 import {createAsyncThunk} from '@reduxjs/toolkit';
 
+import {getOperationInfo as getOperationInfoService} from '~/services/operation';
 import {OperationActions} from '~/types/actions/operation-actions';
 import {OperationInfoResponse} from '~/types/operation';
 import {getToken} from '~/utils/token';
-import {BASE_API_URL} from '~env';
 
 export const getOperationInfo = createAsyncThunk<
   OperationInfoResponse['info'],
@@ -13,17 +11,5 @@ export const getOperationInfo = createAsyncThunk<
 >(OperationActions.GET_INFO, async accountId => {
   const token = await getToken();
 
-  const {data} = await axios.get<OperationInfoResponse>(
-    `${BASE_API_URL}/operation/get-operations-list`,
-    {
-      headers: {
-        Authorization: token,
-      },
-      params: {
-        accountId,
-      },
-    },
-  );
-
-  return data.info;
+  return getOperationInfoService(accountId, token);
 });
