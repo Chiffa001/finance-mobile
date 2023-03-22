@@ -1,6 +1,7 @@
-import {useEffect} from 'react';
+import {useCallback, useEffect} from 'react';
 
-import {getAllAccounts} from '~/store/actions/account-actions';
+import {createAccount, getAllAccounts} from '~/store/actions/account-actions';
+import {AccountData} from '~/types/account';
 
 import {useAppDispatch} from './use-app-dispatch';
 import {useAppSelector} from './use-app-selector';
@@ -11,13 +12,24 @@ export const useAccountList = () => {
   );
   const dispatch = useAppDispatch();
 
+  const updateAccountList = useCallback(() => {
+    dispatch(getAllAccounts());
+  }, [dispatch]);
+
+  const addAccount = useCallback(
+    (data: AccountData, cb?: () => void) => {
+      dispatch(createAccount({data, cb}));
+    },
+    [dispatch],
+  );
+
   useEffect(() => {
     if (failed || inProgress || isDone) {
       return;
     }
 
-    dispatch(getAllAccounts());
-  }, [dispatch, failed, inProgress, isDone]);
+    updateAccountList();
+  }, [failed, inProgress, isDone, updateAccountList]);
 
-  return {list, inProgress, failed};
+  return {list, inProgress, failed, updateAccountList, addAccount};
 };
