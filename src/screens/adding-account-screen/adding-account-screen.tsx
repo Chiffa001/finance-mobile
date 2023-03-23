@@ -3,16 +3,19 @@ import {Button, SafeAreaView} from 'react-native';
 import {ActivityIndicator, TextInput} from 'react-native-paper';
 
 import {Picker} from '@react-native-picker/picker';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 import {FormField} from '~/components/ui/form-field';
 import {Space} from '~/components/ui/space';
 import {useAccountList} from '~/hooks/use-account-list';
 import {useCurrencyList} from '~/hooks/use-currency-list';
-import {NavigationProps} from '~/types/navigation';
+import {ParamNames, RootStackParamList} from '~/types/navigation';
 
 import {styles} from './style';
 
-export const AddingAccountScreen: FC<NavigationProps> = ({navigation}) => {
+export const AddingAccountScreen: FC<
+  NativeStackScreenProps<RootStackParamList, ParamNames.ADDING_ACCOUNT>
+> = ({navigation}) => {
   const {list, inProgress} = useCurrencyList();
   const {addAccount, updateAccountList} = useAccountList();
   const [selectedCurrency, setSelectedCurrency] = useState<number | null>(

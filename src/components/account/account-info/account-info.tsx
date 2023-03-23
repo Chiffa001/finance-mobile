@@ -1,7 +1,9 @@
-import React, {FC, useCallback, useState} from 'react';
+import React, {FC, useCallback} from 'react';
 
-import {OperationList} from '~/components/operation/operation-list';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+
 import {Account} from '~/types/account';
+import {ParamNames, RootStackParamList} from '~/types/navigation';
 
 import {AccountItem} from '../account-item';
 
@@ -10,21 +12,14 @@ type Props = {
 };
 
 export const AccountInfo: FC<Props> = ({account}) => {
-  const [showOperations, setShowOperations] = useState(false);
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const accountPressHandler = useCallback(() => {
-    setShowOperations(prev => !prev);
-  }, []);
+    navigation.navigate(ParamNames.MAIN_STACK, {
+      accountId: account.id,
+      currency: account.currency.code,
+    });
+  }, [account.currency.code, account.id, navigation]);
 
-  return (
-    <>
-      <AccountItem {...account} onPress={accountPressHandler} />
-      {showOperations && (
-        <OperationList
-          accountId={account.id}
-          currency={account.currency.code}
-        />
-      )}
-    </>
-  );
+  return <AccountItem {...account} onPress={accountPressHandler} />;
 };
