@@ -1,29 +1,32 @@
-import {FC} from 'react';
+import {Override} from './utils';
 
-export enum RouteNames {
-  MAIN = 'main',
+export enum ParamNames {
   MAIN_STACK = 'mainStack',
-  STATISTICS = 'statistics',
   AUTHORIZATION = 'authorization',
   ADDING_ACCOUNT = 'addingAccount',
+  MAIN = 'main',
 }
 
-export enum Routes {
-  MAIN = 'MAIN_SCREEN',
-  MAIN_STACK = 'MAIN_STACK_SCREEN',
-  STATISTICS = 'STATISTICS_SCREEN',
-  AUTHORIZATION = 'AUTHORIZATION_SCREEN',
-  ADDING_ACCOUNT = 'ADDING_ACCOUNT_SCREEN',
+export enum BottomParamNames {
+  STATISTICS = 'statistics',
+  ACCOUNT = 'account',
 }
 
-export type Route = {
-  name: Routes;
-  component: FC<NavigationProps>;
+type AccountData = {
+  accountId: number;
+  currency: string;
 };
 
-export type NavigationProps = {
-  navigation: {
-    navigate: (routeName: Routes) => void;
-    goBack: () => void;
-  };
-};
+export type BottomStackParamList = Override<
+  Record<BottomParamNames, undefined>,
+  {
+    [BottomParamNames.ACCOUNT]: AccountData;
+  }
+>;
+
+export type RootStackParamList = Override<
+  Record<ParamNames, undefined>,
+  {
+    [ParamNames.MAIN_STACK]: AccountData;
+  }
+>;
