@@ -3,9 +3,14 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {useAppSelector} from '~/hooks/use-app-selector';
-import {routes} from '~/routes';
+import {ParamNames, RootStackParamList} from '~/types/navigation';
 
-const {Screen, Navigator} = createNativeStackNavigator();
+import {AddingAccountScreen} from './adding-account-screen';
+import {AuthScreen} from './auth-screen';
+import {MainScreen} from './main-screen';
+import {MainStackScreen} from './main-stack-screen';
+
+const {Screen, Navigator} = createNativeStackNavigator<RootStackParamList>();
 
 export const Screens = () => {
   const {isAuth} = useAppSelector(state => state.auth);
@@ -14,14 +19,20 @@ export const Screens = () => {
     <Navigator screenOptions={{headerShown: false}}>
       {isAuth ? (
         <>
-          <Screen {...routes.mainStack} />
+          <Screen component={MainScreen} name={ParamNames.MAIN} />
           <Screen
-            {...routes.addingAccount}
+            component={MainStackScreen}
+            name={ParamNames.MAIN_STACK}
+            options={{headerShown: true, headerTitle: 'Детальная информация'}}
+          />
+          <Screen
+            component={AddingAccountScreen}
+            name={ParamNames.ADDING_ACCOUNT}
             options={{headerShown: true, title: 'Добавить счёт'}}
           />
         </>
       ) : (
-        <Screen {...routes.authorization} />
+        <Screen component={AuthScreen} name={ParamNames.AUTHORIZATION} />
       )}
     </Navigator>
   );
