@@ -2,6 +2,7 @@ import React, {FC, useMemo} from 'react';
 import {DataTable} from 'react-native-paper';
 
 import {Operation} from '~/types/operation';
+import {TransactionTypes} from '~/types/transaction';
 import {getDateTime} from '~/utils/date';
 
 import {styles} from './style';
@@ -12,7 +13,8 @@ export const OperationItem: FC<Props> = ({sum, createdAt, type}) => {
   const {date, time} = useMemo(() => getDateTime(createdAt), [createdAt]);
 
   const operationStyle = useMemo(
-    () => (type === 'INCOME' ? styles.positive : styles.negative),
+    () =>
+      type === TransactionTypes.INCOME ? styles.positive : styles.negative,
     [type],
   );
 
