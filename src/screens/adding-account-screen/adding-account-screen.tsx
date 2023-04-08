@@ -56,7 +56,7 @@ export const AddingAccountScreen: FC<
       <FormField>
         <Picker
           selectedValue={selectedCurrency}
-          onValueChange={v => setSelectedCurrency(v)}>
+          onValueChange={setSelectedCurrency}>
           {list?.map(({id, code}) => (
             <Picker.Item label={code} value={id} key={id} />
           ))}

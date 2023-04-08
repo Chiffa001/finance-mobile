@@ -7,6 +7,6 @@ type Props = {
   onPress: () => void;
 };
 
-export const AddingAccountButton: FC<Props> = ({onPress}) => (
+export const AddingButton: FC<Props> = ({onPress}) => (
   <FAB icon="plus" style={styles.btn} onPress={onPress} />
 );
