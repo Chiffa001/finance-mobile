@@ -1,13 +1,13 @@
 import {Account} from './account';
-
-export type OperationType = 'INCOME' | 'EXPENSE';
+import {TransactionTypes} from './transaction';
+import {User} from './user';
 
 export type Operation = {
   id: number;
   balance: number;
   sum: number;
   createdAt: string;
-  type: OperationType;
+  type: TransactionTypes;
   account: Pick<Account, 'id' | 'currency'>;
 };
 
@@ -16,4 +16,19 @@ export type OperationInfoResponse = {
     total: number;
     operations: Operation[];
   };
+};
+
+export type OperationData = {
+  sum: number;
+  categoryId: number;
+  operationType: TransactionTypes;
+};
+
+export type FullOperationData = {
+  accountId: number;
+} & OperationData;
+
+export type CreateOperationResponse = {
+  user: User;
+  operation: Operation;
 };

@@ -2,7 +2,7 @@ import {createReducer} from '@reduxjs/toolkit';
 
 import {OperationState} from '~/types/state/operation-state';
 
-import {getOperationInfo} from '../actions/operation-actions';
+import {addOperation, getOperationInfo} from '../actions/operation-actions';
 
 const initial: OperationState = {};
 
@@ -22,5 +22,15 @@ export const operationReducer = createReducer(initial, builder =>
       state[meta.arg].isDone = true;
       state[meta.arg].list = payload.operations;
       state[meta.arg].total = payload.total;
+    })
+    .addCase(addOperation.pending, state => {
+      state.sending = true;
+    })
+    .addCase(addOperation.rejected, (state, {error}) => {
+      state.sending = false;
+      state.sendingError = error;
+    })
+    .addCase(addOperation.fulfilled, state => {
+      state.sending = false;
     }),
 );

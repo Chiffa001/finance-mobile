@@ -4,7 +4,7 @@ import {SafeAreaView} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 import {AccountList} from '~/components/account/account-list';
-import {AddingAccountButton} from '~/components/adding-account-button';
+import {AddingButton} from '~/components/adding-button';
 import {ParamNames, RootStackParamList} from '~/types/navigation';
 
 import {styles} from './style';
@@ -19,7 +19,7 @@ export const MainScreen: FC<
   return (
     <SafeAreaView style={styles.container}>
       <AccountList />
-      <AddingAccountButton onPress={addAccountPressHandler} />
+      <AddingButton onPress={addAccountPressHandler} />
     </SafeAreaView>
   );
 };
