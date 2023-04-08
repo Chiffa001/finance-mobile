@@ -17,13 +17,11 @@ export const getAllAccounts = createAsyncThunk<Account[]>(
   },
 );
 
-export const createAccount = createAsyncThunk<
-  void,
-  {data: AccountData; cb?: () => void}
->(AccountActions.ADD, async ({data, cb}) => {
-  const token = await getToken();
+export const createAccount = createAsyncThunk<void, {data: AccountData}>(
+  AccountActions.ADD,
+  async ({data}) => {
+    const token = await getToken();
 
-  await createAccountService(data, token);
-
-  cb?.();
-});
+    await createAccountService(data, token);
+  },
+);

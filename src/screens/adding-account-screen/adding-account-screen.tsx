@@ -31,16 +31,12 @@ export const AddingAccountScreen: FC<
     );
   }
 
-  const addingAccountPressHandler = () => {
-    addAccount(
-      {
-        name: accountName,
-        currencyId: selectedCurrency ?? (list?.[0].id as number),
-      },
-      () => {
-        updateAccountList();
-      },
-    );
+  const addingAccountPressHandler = async () => {
+    await addAccount({
+      name: accountName,
+      currencyId: selectedCurrency ?? (list?.[0].id as number),
+    });
+    updateAccountList();
     navigation.goBack();
   };
 
