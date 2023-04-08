@@ -17,8 +17,8 @@ export const useAccountList = () => {
   }, [dispatch]);
 
   const addAccount = useCallback(
-    (data: AccountData, cb?: () => void) => {
-      dispatch(createAccount({data, cb}));
+    async (data: AccountData) => {
+      await dispatch(createAccount({data}));
     },
     [dispatch],
   );
