@@ -1,23 +1,19 @@
 import {createSelector} from '@reduxjs/toolkit';
 
+import {accountEndpoints} from '~/services/account-service';
+import {categoryEndpoints} from '~/services/category-service';
+import {operationEndpoints} from '~/services/operation-service';
 import {TransactionTypes} from '~/types/transaction';
 
-import {ApplicationState} from './store';
+const accountList = accountEndpoints.getAccounts.select();
 
 export const selectOperationData = (accountId: number) =>
-  createSelector(
-    (state: ApplicationState) => state.operation,
-    state => state[accountId] ?? {},
-  );
+  operationEndpoints.getOperationInfo.select(accountId);
 
 export const selectAccount = (accountId: number) =>
-  createSelector(
-    (state: ApplicationState) => state.account,
-    ({list}) => list?.find(({id}) => id === accountId),
+  createSelector(accountList, ({data}) =>
+    data?.find(({id}) => id === accountId),
   );
 
 export const selectCategories = (type: TransactionTypes) =>
-  createSelector(
-    (state: ApplicationState) => state.category,
-    state => state[type],
-  );
+  categoryEndpoints.getCategoryList.select(type);

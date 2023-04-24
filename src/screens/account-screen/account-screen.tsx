@@ -1,15 +1,15 @@
 import React, {FC, useState} from 'react';
 import {SafeAreaView} from 'react-native';
 import {ActivityIndicator, Card, Text} from 'react-native-paper';
+import {useSelector} from 'react-redux';
 
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 
 import {AddingButton} from '~/components/adding-button';
 import {AddingOperationModal} from '~/components/adding-operation-modal';
 import {OperationList} from '~/components/operation/operation-list';
-import {useAccountList} from '~/hooks/use-account-list';
-import {useAppSelector} from '~/hooks/use-app-selector';
-import {useOperationList} from '~/hooks/use-operation-list';
+import {useGetAccountsQuery} from '~/services/account-service';
+import {useAddOperationMutation} from '~/services/operation-service';
 import {selectAccount} from '~/store/selectors';
 import {Account} from '~/types/account';
 import {BottomParamNames, BottomStackParamList} from '~/types/navigation';
@@ -25,19 +25,21 @@ export const AccountScreen: FC<
   },
 }) => {
   const [showModal, setShowModal] = useState(false);
-  const {name, balance} = useAppSelector(selectAccount(accountId)) as Account;
-  const {addNewOperation, updateOperationList} = useOperationList(accountId);
-  const {updateAccountList, inProgress} = useAccountList();
+  const {name, balance} = useSelector(selectAccount(accountId)) as Account;
+  const [addOperation] = useAddOperationMutation();
+  const {isFetching, refetch: refetchAccounts} = useGetAccountsQuery();
 
   const toggleModalHandler = () => {
     setShowModal(prev => !prev);
   };
 
   const operationSaveHandler = async (data: OperationData) => {
-    await addNewOperation(data);
+    await addOperation({
+      accountId,
+      ...data,
+    });
     setShowModal(false);
-    updateOperationList();
-    updateAccountList();
+    refetchAccounts();
   };
 
   return (
@@ -45,7 +47,7 @@ export const AccountScreen: FC<
       <Card mode="contained" style={styles.card}>
         <Card.Content style={styles.content}>
           <Text variant="titleLarge">{name}</Text>
-          {inProgress ? (
+          {isFetching ? (
             <ActivityIndicator animating={true} />
           ) : (
             <Text variant="titleLarge">

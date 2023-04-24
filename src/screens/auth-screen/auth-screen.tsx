@@ -4,24 +4,20 @@ import {Text, TextInput} from 'react-native-paper';
 
 import {FormField} from '~/components/ui/form-field';
 import {Space} from '~/components/ui/space';
-import {useAppDispatch} from '~/hooks/use-app-dispatch';
-import {logIn} from '~/store/actions/auth-actions';
+import {useLogInMutation} from '~/services/auth-service';
 
 import {styles} from './styles';
 
 export const AuthScreen: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [logIn] = useLogInMutation();
 
-  const dispatch = useAppDispatch();
-
-  const logInPressHandler = () => {
-    dispatch(
-      logIn({
-        email,
-        password,
-      }),
-    );
+  const logInPressHandler = async () => {
+    await logIn({
+      email,
+      password,
+    });
   };
 
   return (

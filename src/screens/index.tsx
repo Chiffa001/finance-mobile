@@ -13,7 +13,7 @@ import {MainStackScreen} from './main-stack-screen';
 const {Screen, Navigator} = createNativeStackNavigator<RootStackParamList>();
 
 export const Screens = () => {
-  const {isAuth} = useAppSelector(state => state.auth);
+  const {isAuth} = useAppSelector(state => state.authStatus);
 
   return (
     <Navigator screenOptions={{headerShown: false}}>
