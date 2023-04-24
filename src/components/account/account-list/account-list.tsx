@@ -2,14 +2,14 @@ import React from 'react';
 import {ActivityIndicator, FlatList} from 'react-native';
 
 import {Space} from '~/components/ui/space';
-import {useAccountList} from '~/hooks/use-account-list';
+import {useGetAccountsQuery} from '~/services/account-service';
 
 import {renderItem} from './render-item';
 
 export const AccountList = () => {
-  const {list, inProgress} = useAccountList();
+  const {currentData: list, isFetching} = useGetAccountsQuery();
 
-  if (inProgress) {
+  if (isFetching) {
     return (
       <Space verticalSpace={10}>
         <ActivityIndicator animating={true} />

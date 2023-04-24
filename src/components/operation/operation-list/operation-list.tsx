@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {ActivityIndicator} from 'react-native';
 import {DataTable} from 'react-native-paper';
 
-import {useOperationList} from '~/hooks/use-operation-list';
+import {useGetOperationInfoQuery} from '~/services/operation-service';
 
 import {OperationItem} from '../operation-item';
 
@@ -14,19 +14,21 @@ type Props = {
 };
 
 export const OperationList: FC<Props> = ({accountId, currency}) => {
-  const {list, inProgress} = useOperationList(accountId);
+  const {currentData, isFetching} = useGetOperationInfoQuery(accountId);
 
-  if (inProgress) {
+  if (isFetching) {
     return <ActivityIndicator size="large" />;
   }
 
-  if (!list) {
+  if (!currentData) {
     return null;
   }
 
-  const mappedList = list.map(({sum, type, createdAt, id}) => (
-    <OperationItem key={id} sum={sum} type={type} createdAt={createdAt} />
-  ));
+  const mappedList = currentData.operations.map(
+    ({sum, type, createdAt, id}) => (
+      <OperationItem key={id} sum={sum} type={type} createdAt={createdAt} />
+    ),
+  );
 
   return (
     <DataTable>

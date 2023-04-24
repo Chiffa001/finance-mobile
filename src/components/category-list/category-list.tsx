@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {View} from 'react-native';
 import {Chip} from 'react-native-paper';
 
-import {useCategoryList} from '~/hooks/use-category-list';
+import {useGetCategoryListQuery} from '~/services/category-service';
 import {TransactionTypes} from '~/types/transaction';
 
 import {styles} from './style';
@@ -18,7 +18,7 @@ export const CategoryList: FC<Props> = ({
   categoryId,
   onPress,
 }) => {
-  const {list} = useCategoryList(categoryType);
+  const {data: list} = useGetCategoryListQuery(categoryType);
 
   const categoryList = list?.map(({id, name}) => (
     <Chip
